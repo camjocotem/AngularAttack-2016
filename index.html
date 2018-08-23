@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <title>Pongular</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/styles.css">
+    <base href="./" />
+
+    <!-- IE required polyfill -->
+    <script src="https://rumblex.s3.amazonaws.com/starter/es6-shim/es6-shim.min.js"></script>
+    <script src="https://rumblex.s3.amazonaws.com/starter/zone.js/dist/zone.js"></script>
+    <script src="https://rumblex.s3.amazonaws.com/starter/reflect-metadata/Reflect.js"></script>
+    <script src="https://rumblex.s3.amazonaws.com/starter/rxjs/bundles/Rx.umd.js"></script>
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/lodash.min.js"></script>
+
+    <!-- 2. Load our 'modules' -->
+    <script src="app/PongApp.js"></script>
+    <script src="build/pongScripts.js"></script>
+
+</head>
+<!-- 3. Display the application -->
+
+<body ng-app="PongApp" ng-controller="PongController" ng-keydown="movePaddle($event)" ng-keyup="stopPaddle($event)">
+    <div id="pongBall" ng-style="{ 'top': ball.yLoc + '%', 'left': ball.xLoc + '%'}"></div>
+    <div layout="column" id="gameContainer">
+        <header id="topMenu" layout="row" layout-align="space-between">
+            <span>Player 1</span>
+            <span>Wins: {{playerOne.score}} I 3</span>
+            <div ng-if="!gameOver">
+                <button ng-click="startMatch()" ng-if="!matchStarted && instructionsHaveBeenRead">START MATCH</button>
+                <button ng-click="newRound()" ng-if="roundIsOver">NEXT ROUND</button>
+                <span ng-if="!roundIsOver && matchStarted">Round: {{roundNumber}}</span>
+            </div>
+            <span>Player 2</span>
+            <span>Wins: {{playerTwo.score}} I 3</span>
+        </header>
+        <div id="pongField" layout="row">
+            <div id="courtOne" layout="column">
+                <div layout="row">
+                    <div id="paddleOne" class="paddle" ng-style="{'top': paddleOne.height + '%'}"></div>
+                </div>
+            </div>
+            <div id="courtTwo" layout="column">
+                <div layout="row">
+                    <div id="paddleTwo" class="paddle" ng-style="{'top': paddleTwo.height + '%'}"></div>
+                </div>
+            </div>
+        </div>
+        <footer layout="row">
+            <div flex="50" layout="row" layout-align="center center">
+                <span>
+                   {{playerOne.text}}
+               </span>
+            </div>
+            <div flex="50" layout="row" layout-align="center center">
+                <span>
+                    {{playerTwo.text}}
+                </span>
+            </div>
+        </footer>
+    </div>
+
+     <ng-include ng-if="!instructionsHaveBeenRead" src="'./app/parts/_instructions.html'"></ng-include>
+     <ng-include ng-if="gameOver" src="'./app/parts/_winner.html'"></ng-include>
+
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+@import './lib/angular-material';
+
+@font-face {
+    font-family: 'Karmatic';
+    src: url('../font/ka1.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Geo-Regular';
+    src: url('../font/geo.regular.ttf') format('truetype');
+}
+
+$gameFont: 'Karmatic';
+$backgroundBlack: #00000F;
+body {
+    background: $backgroundBlack;
+}
+
+button {
+    background: $backgroundBlack;
+    color: white;
+    border: solid 4px white;
+    font-weight: 900;
+    cursor: pointer;
+    font-size: 1.6em;
+    font-family: 'Geo-Regular'
+}
+
+#gameContainer {
+    height: 100%;
+}
+
+.popUp {
+    width: 80%;
+    background: $backgroundBlack;
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    border: 5px solid white;
+    padding: 20px;
+    #confirmationButton {
+        border: 5px solid white;
+        padding: 8px;
+        width: 15%;
+        text-align: center;
+        cursor: pointer;
+    }
+    p {
+        font-family: 'Geo-Regular';
+        font-size: 2em;
+        color: white;
+    }
+}
+
+#pongField {
+    @extend .flex-100;
+    border-top: solid white 4px;
+    border-bottom: solid white 4px;
+}
+
+header {
+    height: 5%;
+}
+
+footer {
+    height: 5%;
+}
+
+span {
+    font-size: 2.3em;
+    font-family: $gameFont;
+    color: white;
+}
+
+#courtOne {
+    @extend .flex-50;
+    border-right: solid 2px white;
+    border-left: dashed 1px white;
+}
+
+#courtTwo {
+    @extend .flex-50;
+    border-left: solid 2px white;
+    border-right: dashed 1px white;
+}
+
+.paddle {
+    position: absolute;
+    height: 92px;
+    width: 17px;
+    background: white;
+    margin: 1%;
+}
+
+#paddleOne {
+    @extend .paddle;
+}
+
+#paddleTwo {
+    @extend .paddle;
+    right: 9px;
+}
+
+#pongBall {
+    position: fixed;
+    background: white;
+    height: 30px;
+    width: 30px;
+}
